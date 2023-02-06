@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  type: 
+  reason: MyString
+  creator_username: MyString
+  timestamp: 2023-02-06 19:21:29
+
+two:
+  user: two
+  type: 
+  reason: MyString
+  creator_username: MyString
+  timestamp: 2023-02-06 19:21:29
