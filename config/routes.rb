@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'signin#index'
+  resources :signin, only: :index
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :tickets, only: [:index, :show, :create]
 end
