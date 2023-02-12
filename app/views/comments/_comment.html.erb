@@ -1,0 +1,13 @@
+<div class="comment">
+  <img src="<%= resize(comment.user.pfp) %>" height="50" width="50" alt="Comment author's profile picture" />
+  <div>
+    <div>
+      <h3><%= comment.user.username %></h3>
+      <% if comment.moderator %>
+        <span class="moderator"><ion-icon name="star"></ion-icon><span>Moderator</span></span>
+      <% end %>
+      <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+    </div>
+    <p><%= comment.content %></p>
+  </div>
+</div>

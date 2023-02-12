@@ -4,6 +4,6 @@ class Type < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   def display_str
-    self.name.gsub('-', ' ').titlecase
+    self.name.gsub('-', ' ').titlecase + " Appeal"
   end
 end

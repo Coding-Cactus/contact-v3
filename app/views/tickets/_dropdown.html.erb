@@ -1,0 +1,61 @@
+<div id='<%= id %>' data-controller="dropdown" data-dropdown-target="dropdown">
+  <% unless multiselect %>
+    <%= form.hidden_field data_id, value: selected.id, data: { dropdown_target: 'singleHidden' } %>
+  <% end %>
+
+  <div data-action="click->dropdown#toggleOpen">
+    <span
+      <% unless multiselect %>
+        class="<%= selected.name if assign_classes %>"
+        data-option-id="<%= selected.id %>"
+      <% end %>
+    >
+      <span data-dropdown-target="selected"><%= multiselect ? hint : selected.display_str %></span>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </span>
+  </div>
+
+  <ul>
+    <% if multiselect %>
+      <li>
+        <%= label_tag 'filter_statuses_all', 'All' %>
+        <label class="check-container">
+          <input type="checkbox"
+                 id="filter_statuses_all"
+                 data-dropdown-target="selectAll"
+                 data-action="change->dropdown#checkboxChange"
+                 checked />
+          <span></span>
+        </label>
+      </li>
+
+      <% choices.each do |choice| %>
+        <li>
+          <%= label_tag "filters_statuses_#{choice.id}", choice.display_str %>
+          <label class="check-container">
+            <%= check_box :filters,
+                          :statuses,
+                          { checked: true, multiple: true, data: { action: "change->dropdown#checkboxChange" } },
+                          choice.id, nil %>
+            <span></span>
+          </label>
+      <% end %>
+
+      <li>
+        <%= form.submit 'Apply', name: nil %>
+      </li>
+    <% else %>
+      <% choices.each do |choice| %>
+        <% unless choice.id == selected.id %>
+          <li
+            class="<%= choice.name if assign_classes %>"
+            data-action="click->dropdown#selectOption"
+            data-option-id="<%= choice.id %>"
+          >
+            <%= choice.display_str %>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

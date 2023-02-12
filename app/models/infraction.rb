@@ -1,5 +1,6 @@
 class Infraction < ApplicationRecord
   belongs_to :user
+  belongs_to :ticket
 
-  validates :type, :reason, :creator_username, :timestamp, presence: true
+  validates :action, :reason, :moderator, :timestamp, presence: true
 end

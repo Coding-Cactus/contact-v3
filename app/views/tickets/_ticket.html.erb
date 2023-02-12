@@ -1,1 +1,22 @@
-<p><%= ticket.id %></p>
+<div class="card">
+  <%= link_to '', ticket, class: 'link-blanket' %>
+
+  <span class="<%= ticket.status.name %>"><%= ticket.status.display_str %></span>
+
+  <a href="<%= ticket.user.url %>">
+    <img src="<%= resize(ticket.user.pfp) %>" alt="profile picture" width="50" height="50" />
+  </a>
+
+  <div>
+    <span>
+      <%= ticket.type.display_str %>
+      <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      <span class="comment-count"><%= ticket.comment_count %></span>
+    </span>
+    <span>
+      <a href="<%= ticket.user.url %>"><%= ticket.user.username %></a>
+    </span>
+  </div>
+
+  <p><%= ticket.content %></p>
+</div>

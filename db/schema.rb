@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_211120) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_171209) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "ticket_id", null: false
@@ -24,12 +24,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_211120) do
 
   create_table "infractions", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "type"
+    t.string "action"
     t.string "reason"
-    t.string "creator_username"
+    t.string "moderator"
     t.datetime "timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "ticket_id", null: false
+    t.index ["ticket_id"], name: "index_infractions_on_ticket_id"
     t.index ["user_id"], name: "index_infractions_on_user_id"
   end
 
@@ -68,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_211120) do
 
   add_foreign_key "comments", "tickets"
   add_foreign_key "comments", "users"
+  add_foreign_key "infractions", "tickets"
   add_foreign_key "infractions", "users"
   add_foreign_key "tickets", "statuses"
   add_foreign_key "tickets", "types"

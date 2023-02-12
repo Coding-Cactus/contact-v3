@@ -1,0 +1,218 @@
+#change-status-form {
+    display: inline;
+}
+
+#change-status {
+    margin-right: 5px;
+    cursor: pointer;
+    width: 125px;
+    display: inline-block;
+    position: relative;
+}
+
+#change-status ion-icon {
+    transition: transform 0.3s;
+}
+
+#change-status.open ion-icon {
+    transform: rotate(180deg);
+}
+
+#change-status ul {
+    list-style: none;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    border-radius: 0 0 15px 15px;
+    position: absolute;
+    top: 24px;
+    left: 0;
+    transition: height 0.3s, width 0.1s linear 0.2s;
+}
+
+#change-status.open ul {
+    height: 74px;
+    width: 100%;
+    transition: height 0.3s, width 0s;
+    transition-delay: 0.2s
+}
+
+#change-status li, #change-status span:first-child {
+    width: 100%;
+    border-radius: 0;
+    text-align: center;
+}
+
+#change-status span:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    transition: border-radius 0.15s linear 0.225s, background-color 0.3s;
+}
+
+#change-status.open span:first-child {
+    border-radius: 15px 15px 0 0;
+    transition: border-radius 0.3s, background-color 0.3s;
+}
+
+#change-status-form input[type='submit'] {
+    font-size: var(--overview);
+    border-radius: var(--radius-circle);
+    padding: 5px 10px;
+    margin-right: 10px;
+    float: none;
+}
+
+.author {
+    margin: 10px 0;
+}
+
+.author img {
+    width: 75px;
+    height: 75px;
+    border-radius: var(--radius-increased);
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.author > div {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+}
+
+.author h2 {
+    display: inline-block;
+    font-size: var(--heading);
+    vertical-align: middle;
+}
+
+.timestamp {
+    color: var(--text-content);
+    font-size: var(--paragraph);
+}
+
+#ticket-info {
+    color: var(--text-content);
+    font-size: var(--paragraph);
+    margin: 25px 0;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+}
+
+details {
+    background-color: var(--foreground-higher);
+    padding: 10px 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+details[open] {
+    padding: 10px;
+}
+
+summary {
+    background-color: var(--foreground);
+    font-size: var(--paragraph);
+    margin: -10px -10px 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+details p {
+    font-size: var(--overview);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    border-bottom: 2px solid var(--foreground);
+}
+
+tbody tr:nth-child(2n) {
+    background-color: var(--foreground);
+}
+
+td, th {
+    text-align: left;
+    font-size: var(--overview);
+    padding: 5px;
+}
+
+#comments h1 {
+    font-size: var(--heading);
+}
+
+.comment {
+    display: flex;
+    margin: 20px 0;
+    padding: 0 30px;
+}
+
+.comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-standard);
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.comment > div {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 60px;
+}
+
+.comment h3 {
+    display: inline-block;
+    font-size: var(--paragraph);
+    vertical-align: middle;
+    margin-right: 3px;
+}
+
+.comment .moderator {
+    background-color: #8DA7B7;
+    font-size: var(--overview);
+    border-radius: var(--radius-standard);
+    margin: 0 3px;
+    padding: 4px 10px;
+    vertical-align: middle;
+}
+
+.comment .moderator span {
+    vertical-align: middle;
+}
+
+.comment .moderator ion-icon {
+    vertical-align: middle;
+    margin-right: 5px;
+    transform: scale(1.2) translateY(-1px);
+}
+
+.comment .timestamp {
+    font-size: var(--overview);
+    color: var(--text-content);
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.comment p {
+    font-size: var(--overview);
+    color: var(--text-content);
+    margin: 5px 0;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    max-width: 900px;
+}
+
+#comments label {
+    display: block;
+    font-size: var(--paragraph);
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}

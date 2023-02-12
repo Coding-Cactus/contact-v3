@@ -1,5 +1,12 @@
-<h1>Tickets</h1>
+<h1><%= current_user_is_mod? ? 'Contact' : 'Your' %> Tickets</h1>
 
-<%= render @tickets %>
+<% unless current_user_is_mod? %>
+  <%= turbo_frame_tag 'new-ticket-frame', src: new_ticket_path %>
+<% end %>
 
-<%= paginate @tickets %>
+<%= render 'filters', types: @status_types %>
+
+<%= turbo_frame_tag 'tickets-list' do %>
+  <%= render @tickets %>
+  <%= paginate @tickets, window: 0 %>
+<% end %>

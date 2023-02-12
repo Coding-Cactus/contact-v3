@@ -1,0 +1,10 @@
+<%= turbo_frame_tag 'comments' do %>
+  <h1>Comments</h1>
+  <% if @comments.length == 0 %>
+    <p>Looks like there are no comments yet. A moderator will get to you very soon.</p>
+  <% else %>
+    <%= render @comments[...-1] %>
+  <% end %>
+
+  <%= render 'new', ticket: @ticket, comment: @new_comment %>
+<% end %>

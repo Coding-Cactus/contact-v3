@@ -5,7 +5,7 @@ class SigninController < ApplicationController
     if signed_in?
       create_current_user unless current_user_exists?
 
-      redirect_to params[:from].nil? ? tickets_path : from
+      redirect_to params[:from].nil? ? tickets_path : params[:from]
     end
   end
 end

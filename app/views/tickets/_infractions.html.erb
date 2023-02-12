@@ -1,0 +1,29 @@
+<details>
+  <summary>Infractions</summary>
+
+  <% if infractions.length == 0 %>
+    <p>Couldn't find any infractions for this user</p>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Moderator</th>
+          <th>Reason</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% infractions.each do |infraction| %>
+          <tr>
+            <td><%= infraction.action %></td>
+            <td><%= infraction.moderator %></td>
+            <td><%= infraction.reason %></td>
+            <td><%= infraction.timestamp %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</details>

@@ -1,0 +1,8 @@
+<%= form_with url: tickets_path, method: :get, data: { turbo_frame: 'tickets-list' } do |form| %>
+  <%= render 'dropdown',
+             id: 'filters',
+             form: form,
+             hint: 'Filters',
+             choices: types,
+             multiselect: true %>
+<% end %>

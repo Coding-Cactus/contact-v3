@@ -1,0 +1,45 @@
+<%= turbo_frame_tag 'new-ticket-frame' do %>
+  <div data-controller="new-ticket">
+    <button data-action="click->new-ticket#new">
+      <ion-icon name="add-outline"></ion-icon>
+      <span>Create New Ticket</span>
+    </button>
+
+    <div id="new-ticket-overlay" data-new-ticket-target="overlay" <%= 'class=show' if @ticket.errors.messages.length > 0 %>>
+
+      <%= form_with model: @ticket, id: 'new-ticket' do |form| %>
+        <div id="close" data-action="click->new-ticket#close">
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+
+        <label>Select Appeal Type</label>
+        <%= render 'dropdown',
+                   id: 'type',
+                   form: form,
+                   data_id: :type_id,
+                   choices: @appeal_types,
+                   selected: @default_type,
+                   multiselect: false,
+                   assign_classes: false %>
+
+        <%= form.label :content, 'Appeal Reason' %>
+        <%= form.text_area :content,
+                           minlength: 50,
+                           required: true,
+                           placeholder: 'Give some information regarding your appeal' %>
+
+        <% @ticket.errors.full_messages.each do |msg| %>
+          <p class="error"><%= msg %></p>
+        <% end %>
+
+        <p id="note">*Note that speaking disrespectfully or informally may result in an absolute refusal</p>
+
+        <%= form.submit %>
+      <% end %>
+    </div>
+  </div>
+
+  <% flash.each do |type, msg| %>
+    <span data-controller="flash" data-flash-target="flash" class="flash <%= type %>"><%= msg %></span>
+  <% end %>
+<% end %>

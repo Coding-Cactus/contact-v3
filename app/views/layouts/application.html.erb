@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>ContactV3</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contact</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#4E5A50">
+    <meta name="author" content="Replit Moderation Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="replit,contact,ticket,ban,warn,appeal,moderation">
+    <meta name="description" content="Contact the Replit community moderators to appeal warnings and bans">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag asset_path('favicon.png') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <% if signed_in? %>
+      <header>
+        <img alt="Your profile picture" src="<%= resize(current_user.pfp) %>" height="50" width="50" />
+        <span><%= current_user.username %></span>
+      </header>
+    <% end %>
+
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

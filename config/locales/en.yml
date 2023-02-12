@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  views:
+    pagination:
+      first: '<ion-icon name="chevron-back-outline"></ion-icon>'
+      previous: '<ion-icon name="arrow-back-outline"></ion-icon>'
+      next: '<ion-icon name="arrow-forward-outline"></ion-icon>'
+      last: '<ion-icon name="chevron-forward-outline"></ion-icon>'

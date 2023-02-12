@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
 
   private
 
-  DEVELOPMENT_USER_ID     = 1
-  DEVELOPMENT_SIGNED_IN   = false
-  DEVELOPMENT_USER_IS_MOD = false
+  DEVELOPMENT_USER_ID     = 2
+  DEVELOPMENT_SIGNED_IN   = true
+  DEVELOPMENT_USER_IS_MOD = true
 
   def require_login
     unless signed_in?
@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
       DEVELOPMENT_SIGNED_IN
     end
   end
+  helper_method :signed_in?
 
   def current_user
     if Rails.env.production?
@@ -28,6 +29,18 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find(DEVELOPMENT_USER_ID) if signed_in?
     end
   end
+  helper_method :current_user
+  def current_user_is_mod?
+    return false unless signed_in?
+
+    if Rails.env.production?
+      request.headers["HTTP_X_REPLIT_USER_ROLES"].split(",")
+             .any? { |r| %w[moderator administrator admin].include?(r) }
+    else
+      DEVELOPMENT_USER_IS_MOD
+    end
+  end
+  helper_method :current_user_is_mod?
 
   def current_user_exists?
     return false unless signed_in?
@@ -36,15 +49,6 @@ class ApplicationController < ActionController::Base
       User.exists?(request.headers["HTTP_X_REPLIT_USER_ID"].to_i)
     else
       User.exists?(DEVELOPMENT_USER_ID)
-    end
-  end
-  def current_user_is_mod?
-    return false unless signed_in?
-
-    if Rails.env.production?
-      request.headers["HTTP_X_REPLIT_USER_ROLES"].split(",").include?("moderator")
-    else
-      DEVELOPMENT_USER_IS_MOD
     end
   end
 
@@ -58,5 +62,9 @@ class ApplicationController < ActionController::Base
       pfp:      headers["HTTP_X_REPLIT_USER_PROFILE_IMAGE"],
       username: headers["HTTP_X_REPLIT_USER_NAME"]
     )
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
   end
 end

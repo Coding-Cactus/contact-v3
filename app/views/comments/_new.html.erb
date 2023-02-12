@@ -1,0 +1,16 @@
+<%= form_with model: [ticket, comment], data: { turbo_frame: 'comments-frame' } do |form| %>
+  <%= form.label :comment, 'Post Comment' %>
+  <%= form.text_area :content,
+                     required: true,
+                     placeholder: 'Give some information regarding your appeal' %>
+
+  <% comment.errors.full_messages.each do |msg| %>
+    <p class="error"><%= msg %></p>
+  <% end %>
+
+  <%= form.submit 'Comment' %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <span data-controller="flash" data-flash-target="flash" class="flash <%= type %>"><%= msg %></span>
+<% end %>
