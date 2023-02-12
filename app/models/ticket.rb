@@ -16,7 +16,14 @@ class Ticket < ApplicationRecord
   after_create do
     Client.new(ENV['SID']).get_user_infractions(self.user.id).each do |infraction|
       self.infractions.create(infraction)
-      p infraction
+    end
+
+    begin
+      Thread.new do
+        Discord.send_ticket(self)
+      end
+    rescue
+      nil
     end
   end
 end

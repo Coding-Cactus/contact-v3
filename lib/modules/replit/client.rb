@@ -38,6 +38,17 @@ module Replit
       warnings
     end
 
+    def send_notification(username, text, url)
+      graphql(
+        Mutations::SEND_NOTIFICATION,
+        input: {
+          url:      url,
+          text:     text,
+          username: username,
+        }
+      )
+    end
+
     private
 
     def graphql(query, **variables)
