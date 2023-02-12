@@ -1,7 +1,7 @@
 class Ticket < ApplicationRecord
   include Replit
 
-  paginates_per 3
+  paginates_per 25
 
   belongs_to :user
   belongs_to :type
