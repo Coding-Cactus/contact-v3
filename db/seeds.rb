@@ -1,10 +1,7 @@
 require 'database_cleaner/active_record'
 
-%w[warn ban].each { |type| Type.create(name: type)  }
-%w[incomplete in-progress accepted denied].each { |status| Status.create(name: status)  }
-
 if Rails.env.development?
-  DatabaseCleaner.clean_with(:truncation, :only => %w[users])
+  DatabaseCleaner.clean_with(:truncation)
 
   User.create(
     username: "User1",
@@ -21,3 +18,6 @@ if Rails.env.development?
     pfp: "https://www.gravatar.com/avatar/457d746c6b475745e5b4e30dae465d5b?d=https://repl.it/public/images/evalbot/evalbot_35.png&s=256"
   )
 end
+
+%w[warn ban].each { |type| Type.create(name: type)  }
+%w[incomplete in-progress accepted denied].each { |status| Status.create(name: status)  }
