@@ -10,8 +10,8 @@ class TicketsController < ApplicationController
                  .order(created_at: :desc)
                  .page(params[:page])
                  .left_joins(:comments)
-                 .select("tickets.*, COUNT(comments.id) AS comment_count")
-                 .group("tickets.id")
+                 .select("contact_tickets.*, COUNT(contact_comments.id) AS comment_count")
+                 .group("contact_tickets.id")
     @status_types = Status.all
   end
 

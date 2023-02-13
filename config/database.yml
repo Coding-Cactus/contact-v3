@@ -7,22 +7,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV["PGUSER"] %>
+  url: <%= ENV["DB_CONNECTION_STRING"] %>
+  user: <%= ENV["PGUSER"] %>
   password: <%= ENV["PGPASSWORD"] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
-development:
-  <<: *default
-  database: contact_development
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: contact_test
+# development:
+#   <<: *default
+#   database: contact_development
+# 
+# # Warning: The database defined as "test" will be erased and
+# # re-generated from your development database when you run "rake".
+# # Do not set this db to the same as development or production.
+# test:
+#   <<: *default
+#   database: contact_test
 
 production:
   <<: *default
-  database: contact_production
+  database: <%= ENV["PGDATABASE"] %>
