@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
   validates :moderator, inclusion: { in: [ true, false ] }
 
   after_create do
-    if self.moderator
+    if self.moderator && Rails.env.production?
       Thread.new do
         Client.new(ENV['SID']).send_notification(
           self.ticket.user.username,
