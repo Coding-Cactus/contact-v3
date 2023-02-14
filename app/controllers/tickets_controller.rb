@@ -77,7 +77,7 @@ class TicketsController < ApplicationController
   end
 
   def populate_types_and_status
-    @appeal_types = Type.all
+    @appeal_types = Type.where.not(name: 'report')
     @default_type = @appeal_types.find_by(name: 'warn')
   end
 end
