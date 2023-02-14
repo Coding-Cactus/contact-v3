@@ -3,7 +3,7 @@
   <% if @comments.length == 0 %>
     <p>Looks like there are no comments yet. A moderator will get to you very soon.</p>
   <% else %>
-    <%= render @comments[...-1] %>
+    <%= render @comments %>
   <% end %>
 
   <%= render 'new', ticket: @ticket, comment: @new_comment %>
