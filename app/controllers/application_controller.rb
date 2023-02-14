@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  DEVELOPMENT_USER_ID     = 2
+  DEVELOPMENT_USER_ID     = 2681007
   DEVELOPMENT_SIGNED_IN   = true
   DEVELOPMENT_USER_IS_MOD = true
 
@@ -24,10 +24,19 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if Rails.env.production?
-      @current_user ||= User.find(request.headers["HTTP_X_REPLIT_USER_ID"].to_i) if signed_in?
+      if signed_in? && @current_user.nil?
+        @current_user = User.find(request.headers["HTTP_X_REPLIT_USER_ID"].to_i)
+
+        # Update username and pfp if they've changed
+        pfp      = request.headers["HTTP_X_REPLIT_USER_PROFILE_IMAGE"]
+        username = request.headers["HTTP_X_REPLIT_USER_NAME"]
+        @current_user.update(pfp: pfp, username: username) if @current_user.pfp != pfp || @current_user.username != username
+      end
     else
       @current_user ||= User.find(DEVELOPMENT_USER_ID) if signed_in?
     end
+
+    @current_user
   end
   helper_method :current_user
   def current_user_is_mod?
