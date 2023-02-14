@@ -355,3 +355,48 @@
     transform: scale(1.25);
     vertical-align: baseline;
 }
+
+@media screen and (max-width: 660px) {
+    #filters {
+        position: static;
+    }
+
+    #filters div, #filters ul {
+        width: 100%
+    }
+
+    #filters.open ul {
+        height: 337px;
+    }
+
+    .check-container span::after {
+        left: 12px;
+        top: 9px;
+        width: 3px;
+        height: 8px;
+    }
+
+    #new-ticket {
+         margin: calc(50vh - 250px) 20px;
+     }
+
+    #type ul {
+        top: 40px;
+    }
+
+    #type.open ul {
+        height: 40px;
+    }
+
+    .card h2, .card img {
+        display: block;
+    }
+
+    .card > div > div:last-child, .card > div > div:first-child {
+        margin: 0;
+    }
+
+    .card p {
+        max-height: 53px;
+    }
+}

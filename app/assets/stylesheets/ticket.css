@@ -216,3 +216,22 @@ td, th {
     margin-bottom: 10px;
     margin-top: 30px;
 }
+
+@media screen and (max-width: 660px) {
+    #change-status.open ul {
+        height: 64px;
+        top: 21px;
+    }
+
+    .comment {
+        padding: 0;
+    }
+
+    .comment > div {
+        margin-right: 0;
+    }
+
+    .comment .timestamp {
+        color: #EbEbEb;
+    }
+}

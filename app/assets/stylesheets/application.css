@@ -226,3 +226,29 @@ header span {
 .flash.alert {
     background-color: #AF3838;
 }
+
+@media screen and (max-width: 660px) {
+    :root {
+        --heading: 26px;
+        --paragraph: 16px;
+        --overview: 14px;
+    }
+
+    main {
+        padding: 0 15px;
+    }
+
+    header {
+        margin: 15px auto;
+        padding: 0 15px;
+    }
+
+    header img {
+        width: 50px;
+        height: 50px;
+    }
+
+    h1 {
+        margin: 17px 0;
+    }
+}
