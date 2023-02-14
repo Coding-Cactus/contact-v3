@@ -49,6 +49,7 @@ class TicketsController < ApplicationController
 
   def filters
     return Status.all.map(&:id) if params.nil? || !params.include?(:filters)
+
     params.require(:filters).permit(statuses: [])[:statuses]
   end
 
