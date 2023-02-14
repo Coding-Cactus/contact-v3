@@ -7,11 +7,9 @@ class TicketsController < ApplicationController
   def index
     @tickets = (current_user_is_mod? ? Ticket.all : current_user.tickets)
                  .where(status_id: filters)
+                 .includes(:user, :status, :type)
                  .order(created_at: :desc)
                  .page(params[:page])
-                 .left_joins(:comments)
-                 .select("contact_tickets.*, COUNT(contact_comments.id) AS comment_count")
-                 .group("contact_tickets.id")
     @status_types = Status.all
   end
 
@@ -32,12 +30,10 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @ticket = Ticket.find_by(id: params[:id]) || not_found
     @status_types = Status.all
   end
 
   def update
-    @ticket = Ticket.find_by(id: params[:id]) || not_found
     if @ticket.update(update_params)
       flash[:notice] = 'Status updated!'
       redirect_to @ticket

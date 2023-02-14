@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :populate_ticket
 
   def index
-    @comments = @ticket.comments
+    @comments = @ticket.comments.includes(:user)
     @new_comment = @ticket.comments.build
   end
 

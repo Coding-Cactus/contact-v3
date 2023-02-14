@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_204331) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_14_141005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_204331) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comments_count"
     t.index ["status_id"], name: "index_contact_tickets_on_status_id"
     t.index ["type_id"], name: "index_contact_tickets_on_type_id"
     t.index ["user_id"], name: "index_contact_tickets_on_user_id"

@@ -11,7 +11,7 @@
     <span>
       <%= ticket.type.display_str %>
       <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-      <span class="comment-count"><%= ticket.comment_count %></span>
+      <span class="comment-count"><%= ticket.comments.size %></span>
     </span>
     <span>
       <a href="<%= ticket.user.url %>"><%= ticket.user.username %></a>

@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
   self.table_name = 'contact_comments'
 
   belongs_to :user
-  belongs_to :ticket
+  belongs_to :ticket, counter_cache: true
 
   validates :content, presence: true
   validates :moderator, inclusion: { in: [ true, false ] }
