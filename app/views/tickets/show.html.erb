@@ -6,7 +6,7 @@
   <div>
     <img height="75" width="75" src="<%= resize(@ticket.user.pfp, 75) %>" alt="Ticket author's profile picture" />
     <div>
-      <h2><%= link_to @ticket.user.username, @ticket.user.url %></h2>
+      <h2><%= link_to @ticket.user.username, @ticket.user.url, target: '_blank' %></h2>
       <span class="timestamp"><%= time_ago_in_words(@ticket.created_at) %> ago</span>
     </div>
   </div>

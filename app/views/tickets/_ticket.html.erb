@@ -3,7 +3,7 @@
 
   <span class="<%= ticket.status.name %>"><%= ticket.status.display_str %></span>
 
-  <a href="<%= ticket.user.url %>">
+  <a href="<%= ticket.user.url %>" target="_blank">
     <img src="<%= resize(ticket.user.pfp) %>" alt="profile picture" width="50" height="50" />
   </a>
 
@@ -14,7 +14,7 @@
       <span class="comment-count"><%= ticket.comments.size %></span>
     </span>
     <span>
-      <a href="<%= ticket.user.url %>"><%= ticket.user.username %></a>
+      <a href="<%= ticket.user.url %>" target="_blank"><%= ticket.user.username %></a>
     </span>
   </div>
 
