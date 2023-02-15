@@ -66,6 +66,9 @@
 
 .author {
     margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .author img {
@@ -76,7 +79,7 @@
     margin-right: 10px;
 }
 
-.author > div {
+.author > div > div {
     display: inline-flex;
     flex-direction: column;
     vertical-align: middle;

@@ -125,7 +125,7 @@ ion-icon {
     vertical-align: middle;
 }
 
-button, input[type='submit'] {
+button, input[type='submit'], #home {
     background: #688368;
     font-size: var(--paragraph);
     border: none;
@@ -134,15 +134,16 @@ button, input[type='submit'] {
     margin: 10px 0;
     padding: 10px;
     transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
 }
 
-button:hover, input[type='submit']:hover {
+button:hover, input[type='submit']:hover, #home:hover {
     background-color: var(--foreground-higher);
     transform: scale(1.05);
     cursor: pointer;
 }
 
-button:active, input[type='submit']:active {
+button:active, input[type='submit']:active, #home:active {
     transform: scale(1.075);
     background-color: var(--foreground-highest);
 }

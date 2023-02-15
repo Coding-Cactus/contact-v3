@@ -3,11 +3,14 @@
 <span><%= @ticket.type.display_str %></span>
 
 <div class="author">
-  <img height="75" width="75" src="<%= resize(@ticket.user.pfp, 75) %>" alt="Ticket author's profile picture" />
   <div>
-    <h2><%= link_to @ticket.user.username, @ticket.user.url %></h2>
-    <span class="timestamp"><%= time_ago_in_words(@ticket.created_at) %> ago</span>
+    <img height="75" width="75" src="<%= resize(@ticket.user.pfp, 75) %>" alt="Ticket author's profile picture" />
+    <div>
+      <h2><%= link_to @ticket.user.username, @ticket.user.url %></h2>
+      <span class="timestamp"><%= time_ago_in_words(@ticket.created_at) %> ago</span>
+    </div>
   </div>
+  <%= link_to 'Home', root_path, id: 'home' %>
 </div>
 
 <p id="ticket-info"><%= @ticket.content %></p>
