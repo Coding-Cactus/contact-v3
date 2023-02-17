@@ -32,7 +32,7 @@ module Discord
   def self.send_ticket(ticket)
     CLIENT.execute do |builder|
       builder.username   = "Mod Contact"
-      builder.avatar_url = "https://contact.moderation.repl.co/favicon.ico"
+      builder.avatar_url = "https://contact.moderation.repl.co/favicon.png"
 
       builder.add_embed do |embed|
         embed.title = "New Ticket - Ticket ##{ticket.id} - #{ticket.type.display_str}"
