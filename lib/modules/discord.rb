@@ -1,6 +1,8 @@
 require 'discordrb/webhooks'
 
 module Discord
+  USERNAME = 'Mod Contact'
+  PFP_URL  = 'https://contact.moderation.repl.co/favicon.png'
   CLIENT  = Discordrb::Webhooks::Client.new(url: ENV['WEBHOOK_URL'])
   COLOURS = {
     'denied'      => 0xdd4444,
@@ -11,8 +13,8 @@ module Discord
 
   def self.send_comment(comment)
     CLIENT.execute do |builder|
-      builder.username   = "Mod Contact"
-      builder.avatar_url = "https://contact.moderation.repl.co/favicon.ico"
+      builder.username   = USERNAME
+      builder.avatar_url = PFP_URL
 
       builder.add_embed do |embed|
         embed.title = "New Comment - Ticket ##{comment.ticket.id} - #{comment.ticket.type.display_str}"
@@ -31,8 +33,8 @@ module Discord
 
   def self.send_ticket(ticket)
     CLIENT.execute do |builder|
-      builder.username   = "Mod Contact"
-      builder.avatar_url = "https://contact.moderation.repl.co/favicon.png"
+      builder.username   = USERNAME
+      builder.avatar_url = PFP_URL
 
       builder.add_embed do |embed|
         embed.title = "New Ticket - Ticket ##{ticket.id} - #{ticket.type.display_str}"
