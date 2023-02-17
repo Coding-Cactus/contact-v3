@@ -3,8 +3,8 @@ require 'discordrb/webhooks'
 module Discord
   USERNAME = 'Mod Contact'
   PFP_URL  = 'https://contact.moderation.repl.co/favicon.png'
-  CLIENT  = Discordrb::Webhooks::Client.new(url: ENV['WEBHOOK_URL'])
-  COLOURS = {
+  CLIENT   = Discordrb::Webhooks::Client.new(url: ENV['WEBHOOK_URL'])
+  COLOURS  = {
     'denied'      => 0xdd4444,
     'accepted'    => 0x66dd44,
     'incomplete'  => 0x99aaaa,
