@@ -6,18 +6,22 @@ class Ticket < ApplicationRecord
   paginates_per 25
 
   belongs_to :user
-  belongs_to :type
-  belongs_to :status
+
+  enum status:      %i[incomplete in-progress accepted denied]
+  enum appeal_type: %i[warn ban report]
 
   has_many :comments
   has_many :infractions
 
-  validates :user, :type, :status, presence: true
+  validates :status,      inclusion: { in: statuses.keys }
+  validates :appeal_type, inclusion: { in: appeal_types.keys }
+
+  validates :user, :appeal_type, :status, presence: true
   validates :content, presence: true, length: { minimum: 50 }
 
   after_create do
-    Client.new(ENV['SID']).get_user_infractions(self.user.id).each do |infraction|
-      self.infractions.create(infraction)
+    Client.new(ENV['SID']).get_user_infractions(user.id).each do |infraction|
+      infractions.create(infraction)
     end
 
     begin
@@ -27,5 +31,21 @@ class Ticket < ApplicationRecord
     rescue
       nil
     end
+  end
+
+  def display_appeal_type
+    "#{appeal_type.to_s.gsub('-', ' ').titlecase} Appeal"
+  end
+
+  def display_status
+    status.to_s.gsub('-', ' ').titlecase
+  end
+
+  def self.appeal_types_list
+    appeal_types.map { |k, _| k }
+  end
+
+  def self.statuses_list
+    statuses.map { |k, _| k }
   end
 end

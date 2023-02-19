@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_141005) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_19_090842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,31 +38,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_141005) do
     t.index ["user_id"], name: "index_contact_infractions_on_user_id"
   end
 
-  create_table "contact_statuses", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_contact_statuses_on_name"
-  end
-
   create_table "contact_tickets", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "type_id", null: false
-    t.integer "status_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comments_count"
-    t.index ["status_id"], name: "index_contact_tickets_on_status_id"
-    t.index ["type_id"], name: "index_contact_tickets_on_type_id"
+    t.integer "status", default: 0
+    t.integer "appeal_type", default: 0
     t.index ["user_id"], name: "index_contact_tickets_on_user_id"
-  end
-
-  create_table "contact_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_contact_types_on_name"
   end
 
   create_table "contact_users", force: :cascade do |t|
@@ -76,7 +60,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_141005) do
   add_foreign_key "contact_comments", "contact_users", column: "user_id"
   add_foreign_key "contact_infractions", "contact_tickets", column: "ticket_id"
   add_foreign_key "contact_infractions", "contact_users", column: "user_id"
-  add_foreign_key "contact_tickets", "contact_statuses", column: "status_id"
-  add_foreign_key "contact_tickets", "contact_types", column: "type_id"
   add_foreign_key "contact_tickets", "contact_users", column: "user_id"
 end

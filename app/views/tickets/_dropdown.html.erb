@@ -1,16 +1,16 @@
 <div id='<%= id %>' data-controller="dropdown" data-dropdown-target="dropdown">
   <% unless multiselect %>
-    <%= form.hidden_field data_id, value: selected.id, data: { dropdown_target: 'singleHidden' } %>
+    <%= form.hidden_field data_id, value: selected, data: { dropdown_target: 'singleHidden' } %>
   <% end %>
 
   <div data-action="click->dropdown#toggleOpen">
     <span
       <% unless multiselect %>
-        class="<%= selected.name if assign_classes %>"
-        data-option-id="<%= selected.id %>"
+        class="<%= selected if assign_classes %>"
+        data-option="<%= selected %>"
       <% end %>
     >
-      <span data-dropdown-target="selected"><%= multiselect ? hint : selected.display_str %></span>
+      <span data-dropdown-target="selected"><%= multiselect ? hint : display_str(selected) %></span>
       <ion-icon name="chevron-down-outline"></ion-icon>
     </span>
   </div>
@@ -31,12 +31,12 @@
 
       <% choices.each do |choice| %>
         <li>
-          <%= label_tag "filters_statuses_#{choice.id}", choice.display_str %>
+          <%= label_tag "filters_statuses_#{choice}", display_str(choice) %>
           <label class="check-container">
             <%= check_box :filters,
                           :statuses,
                           { checked: true, multiple: true, data: { action: "change->dropdown#checkboxChange" } },
-                          choice.id, nil %>
+                          choice, nil %>
             <span></span>
           </label>
       <% end %>
@@ -46,13 +46,13 @@
       </li>
     <% else %>
       <% choices.each do |choice| %>
-        <% unless choice.id == selected.id %>
+        <% unless choice == selected %>
           <li
-            class="<%= choice.name if assign_classes %>"
+            class="<%= choice if assign_classes %>"
             data-action="click->dropdown#selectOption"
-            data-option-id="<%= choice.id %>"
+            data-option="<%= choice %>"
           >
-            <%= choice.display_str %>
+            <%= display_str(choice) %>
           </li>
         <% end %>
       <% end %>

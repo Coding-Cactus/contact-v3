@@ -1,7 +1,7 @@
 <div class="card">
   <%= link_to '', ticket, class: 'link-blanket', data: { turbo_frame: "_top" } %>
 
-  <span class="<%= ticket.status.name %>"><%= ticket.status.display_str %></span>
+  <span class="<%= ticket.status %>"><%= ticket.display_status %></span>
 
   <a href="<%= ticket.user.url %>" target="_blank">
     <img src="<%= resize(ticket.user.pfp) %>" alt="profile picture" width="50" height="50" />
@@ -9,7 +9,7 @@
 
   <div>
     <span>
-      <%= ticket.type.display_str %>
+      <%= ticket.display_appeal_type %>
       <ion-icon name="chatbox-ellipses-outline"></ion-icon>
       <span class="comment-count"><%= ticket.comments.size %></span>
     </span>

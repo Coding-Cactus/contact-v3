@@ -1,24 +1,24 @@
 class TicketsController < ApplicationController
-  before_action :does_ticket_exist, only: [:show, :update]
+  before_action :does_ticket_exist, only: %i[show update]
   before_action :can_view_ticket, only: :show
   before_action :can_update_ticket, only: :update
-  before_action :populate_types_and_status, only: [:new, :create]
+  before_action :populate_types_and_status, only: %i[new create]
 
   def index
     @tickets = (current_user_is_mod? ? Ticket.all : current_user.tickets)
-                 .where(status_id: filters)
-                 .includes(:user, :status, :type)
-                 .order(created_at: :desc)
-                 .page(params[:page])
-    @status_types = Status.all
+               .where(status: filters)
+               .includes(:user)
+               .order(created_at: :desc)
+               .page(params[:page])
+    @status_types = Ticket.statuses_list
   end
 
   def new
     @ticket = current_user.tickets.build
   end
+
   def create
     @ticket = current_user.tickets.new(new_ticket_params)
-    @ticket.status_id = Status.find_by(name: 'incomplete').id
 
     if @ticket.save
       flash[:notice] = 'Ticket created!'
@@ -30,7 +30,7 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @status_types = Status.all
+    @status_types = Ticket.statuses_list
   end
 
   def update
@@ -39,7 +39,7 @@ class TicketsController < ApplicationController
       redirect_to @ticket
     else
       @ticket = Ticket.find(params[:id])
-      @status_types = Status.all
+      @status_types = Ticket.statuses_list
       flash.now[:alert] = 'Invalid status!'
       render :show, status: :unprocessable_entity
     end
@@ -48,17 +48,17 @@ class TicketsController < ApplicationController
   private
 
   def filters
-    return Status.all.map(&:id) if params.nil? || !params.include?(:filters)
+    return Ticket.statuses_list if params.nil? || !params.include?(:filters)
 
     params.require(:filters).permit(statuses: [])[:statuses]
   end
 
   def new_ticket_params
-    params.require(:ticket).permit(:type_id, :content)
+    params.require(:ticket).permit(:appeal_type, :content)
   end
 
   def update_params
-    params.require(:ticket).permit(:status_id)
+    params.require(:ticket).permit(:status)
   end
 
   def does_ticket_exist
@@ -66,7 +66,7 @@ class TicketsController < ApplicationController
   end
 
   def can_view_ticket
-    not_found unless current_user_is_mod? || Ticket.find(params[:id]).user.id == current_user.id
+    not_found unless current_user_is_mod? || @ticket.user.id == current_user.id
   end
 
   def can_update_ticket
@@ -74,7 +74,7 @@ class TicketsController < ApplicationController
   end
 
   def populate_types_and_status
-    @appeal_types = Type.where.not(name: 'report')
-    @default_type = @appeal_types.find_by(name: 'warn')
+    @appeal_types = Ticket.appeal_types_list
+    @default_type = @appeal_types[0]
   end
 end

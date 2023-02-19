@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   private
 
   def populate_ticket
-    @ticket = Ticket.find_by(id: params[:ticket_id])
+    @ticket = Ticket.find(params[:ticket_id])
     not_found if @ticket.nil? || !(current_user_is_mod? || @ticket.user.id == current_user.id)
   end
 

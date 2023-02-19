@@ -5,7 +5,7 @@
                  id: 'change-status',
                  form: form,
                  choices: choices,
-                 data_id: :status_id,
+                 data_id: :status,
                  selected: ticket.status,
                  multiselect: false,
                  assign_classes: true %>
@@ -18,5 +18,5 @@
     <% end %>
   <% end %>
 <% else %>
-  <span class="<%= ticket.status.name %>"><%= ticket.status.display_str %></span>
+  <span class="<%= ticket.status %>"><%= ticket.display_status %></span>
 <% end %>
