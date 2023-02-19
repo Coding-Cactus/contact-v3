@@ -74,7 +74,7 @@ class TicketsController < ApplicationController
   end
 
   def populate_types_and_status
-    @appeal_types = Ticket.appeal_types_list
+    @appeal_types = Ticket.appeal_types_list.reject { |t| t == "report" }
     @default_type = @appeal_types[0]
   end
 end
