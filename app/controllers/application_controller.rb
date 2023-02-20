@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Replit
+  
   before_action :require_login
 
   private
@@ -23,12 +25,16 @@ class ApplicationController < ActionController::Base
   def current_user
     if Rails.env.production?
       if signed_in? && @current_user.nil?
-        @current_user = User.find(request.headers['HTTP_X_REPLIT_USER_ID'].to_i)
+        @current_user = User.find_by(id: request.headers['HTTP_X_REPLIT_USER_ID'].to_i)
 
-        # Update username and pfp if they've changed
-        pfp      = request.headers['HTTP_X_REPLIT_USER_PROFILE_IMAGE']
-        username = request.headers['HTTP_X_REPLIT_USER_NAME']
-        @current_user.update(pfp:, username:) if @current_user.pfp != pfp || @current_user.username != username
+        if @current_user.nil?
+          @current_user = create_current_user
+        else
+          # Update username and pfp if they've changed
+          pfp      = request.headers['HTTP_X_REPLIT_USER_PROFILE_IMAGE']
+          username = request.headers['HTTP_X_REPLIT_USER_NAME']
+          @current_user.update(pfp:, username:) if @current_user.pfp != pfp || @current_user.username != username
+        end
       end
     elsif signed_in?
       @current_user ||= User.find(DEVELOPMENT_USER_ID)
@@ -64,10 +70,16 @@ class ApplicationController < ActionController::Base
 
     headers = request.headers
 
-    User.create(
-      id:       headers['HTTP_X_REPLIT_USER_ID'].to_i,
-      pfp:      headers['HTTP_X_REPLIT_USER_PROFILE_IMAGE'],
-      username: headers['HTTP_X_REPLIT_USER_NAME']
+    id       = headers['HTTP_X_REPLIT_USER_ID'].to_i
+    pfp      = headers['HTTP_X_REPLIT_USER_PROFILE_IMAGE']
+    username = headers['HTTP_X_REPLIT_USER_NAME']    
+    
+    pfp = Client.new.get_user_pfp(id) if pfp.blank?
+
+    User.create!(
+      id:       id,
+      pfp:      pfp,
+      username: username
     )
   end
 

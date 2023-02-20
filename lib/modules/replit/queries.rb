@@ -2,6 +2,12 @@
 
 module Replit
   module Queries
+    GET_PFP = "
+      query($id: Int!) {
+        user(id: $id) { image }
+      }
+    "
+    
     GET_INFRACTIONS = "
       query ($id: Int!) {
         user(id: $id) {

@@ -1,7 +1,14 @@
 module Replit
   class Client
-    def initialize(sid)
+    def initialize(sid=nil)
       @sid = sid
+    end
+
+    def get_user_pfp(id)
+      graphql(
+        Queries::GET_PFP,
+        id: id
+      )["user"]["image"]
     end
 
     def get_user_infractions(id)

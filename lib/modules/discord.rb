@@ -17,10 +17,10 @@ module Discord
       builder.avatar_url = PFP_URL
 
       builder.add_embed do |embed|
-        embed.title = "New Comment - Ticket ##{comment.ticket.id} - #{comment.ticket.type.display_str}"
+        embed.title = "New Comment - Ticket ##{comment.ticket.id} - #{comment.ticket.display_appeal_type}"
         embed.url = "https://contact.moderation.repl.co/tickets/#{comment.ticket.id}"
         embed.description = comment.content
-        embed.colour = COLOURS[comment.ticket.status.name]
+        embed.colour = COLOURS[comment.ticket.status]
         embed.timestamp = comment.created_at
         embed.author = Discordrb::Webhooks::EmbedAuthor.new(
           url:      comment.user.url,
@@ -37,10 +37,10 @@ module Discord
       builder.avatar_url = PFP_URL
 
       builder.add_embed do |embed|
-        embed.title = "New Ticket - Ticket ##{ticket.id} - #{ticket.type.display_str}"
+        embed.title = "New Ticket - Ticket ##{ticket.id} - #{ticket.display_appeal_type}"
         embed.url = "https://contact.moderation.repl.co/tickets/#{ticket.id}"
         embed.description = ticket.content
-        embed.colour = COLOURS[ticket.status.name]
+        embed.colour = COLOURS[ticket.status]
         embed.timestamp = ticket.created_at
         embed.author = Discordrb::Webhooks::EmbedAuthor.new(
           url:      ticket.user.url,
