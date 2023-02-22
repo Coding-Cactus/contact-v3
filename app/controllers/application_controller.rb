@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Replit
-  
+
   before_action :require_login
 
   private
@@ -72,8 +72,8 @@ class ApplicationController < ActionController::Base
 
     id       = headers['HTTP_X_REPLIT_USER_ID'].to_i
     pfp      = headers['HTTP_X_REPLIT_USER_PROFILE_IMAGE']
-    username = headers['HTTP_X_REPLIT_USER_NAME']    
-    
+    username = headers['HTTP_X_REPLIT_USER_NAME']
+
     pfp = Client.new.get_user_pfp(id) if pfp.blank?
 
     User.create!(
