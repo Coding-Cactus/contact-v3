@@ -1,0 +1,64 @@
+#add-ban {
+    margin-bottom: 20px;
+}
+
+#add-ban label {
+    display: inline-block;
+    font-size: var(--paragraph);
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+
+#add-ban input[type='text'] {
+    background-color: var(--foreground-dim);
+    color: var(--text-higher);
+    padding: 10px;
+    font-size: var(--overview);
+    border: none;
+    border-radius: var(--radius-standard);
+    vertical-align: middle;
+    margin: 0 2px;
+    outline: 2px solid transparent;
+    transition: outline-color 0.3s;
+}
+
+#add-ban input:focus-visible {
+    outline: 2px solid var(--foreground-highest);
+}
+
+#add-ban input[type='text']::placeholder {
+    color: #ABABAB;
+}
+
+#add-ban input[type='submit'] {
+    float: none;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    vertical-align: middle;
+}
+
+.banned-user {
+    background-color: var(--foreground);
+    padding: 15px;
+    font-size: var(--paragraph);
+    border-radius: var(--radius-standard);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.banned-user a {
+    margin: 0 !important;
+    background-color: #9F3E3E !important;
+}
+
+.banned-user a:hover {
+    background-color: #a63535 !important;
+}
+
+.banned-user a:active {
+    background-color: #b72727 !important;
+}

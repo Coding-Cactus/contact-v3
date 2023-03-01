@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Replit
 
   before_action :require_login
+  before_action :check_banned
 
   private
 
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   def require_login
     redirect_to signin_index_path(from: request.path) unless signed_in?
+  end
+
+  def check_banned
+    redirect_to banned_path if signed_in? && current_user.banned?
   end
 
   def signed_in?

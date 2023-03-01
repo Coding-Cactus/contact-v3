@@ -125,7 +125,7 @@ ion-icon {
     vertical-align: middle;
 }
 
-button, input[type='submit'], #home {
+button, input[type='submit'], #home, .banned-user a {
     background: #688368;
     font-size: var(--paragraph);
     border: none;
@@ -137,13 +137,13 @@ button, input[type='submit'], #home {
     text-decoration: none;
 }
 
-button:hover, input[type='submit']:hover, #home:hover {
+button:hover, input[type='submit']:hover, #home:hover, .banned-user a:hover {
     background-color: var(--foreground-higher);
     transform: scale(1.05);
     cursor: pointer;
 }
 
-button:active, input[type='submit']:active, #home:active {
+button:active, input[type='submit']:active, #home:active, .banned-user a:active {
     transform: scale(1.075);
     background-color: var(--foreground-highest);
 }
@@ -201,6 +201,10 @@ header span {
     padding: 2px 10px;
     border-radius: var(--radius-circle);
     vertical-align: middle;
+}
+
+ul, ol {
+    padding-left: 40px;
 }
 
 .flash {

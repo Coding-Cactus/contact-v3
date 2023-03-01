@@ -1,0 +1,10 @@
+<% bans.each do |user| %>
+  <div class="banned-user">
+    <span><%= user.username %></span>
+
+    <%= link_to 'Unban', ban_path(user.id), data: {
+                  turbo_method: 'delete',
+                  confirm: 'Are you sure you want to allow this user to create tickets and comments?'
+                } %>
+  </div>
+<% end %>

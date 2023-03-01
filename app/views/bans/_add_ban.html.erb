@@ -1,0 +1,12 @@
+<%= form_with url: bans_path, method: 'post', id: 'add-ban' do |form| %>
+  <h2>Add Banned User</h2>
+
+  <%= form.label :username %>
+  <%= form.text_field :username, placeholder: 'Enter username', required: true, autocomplete: :off %>
+
+  <%= form.submit 'Ban' %>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <span data-controller="flash" data-flash-target="flash" class="flash <%= type %>"><%= msg %></span>
+<% end %>

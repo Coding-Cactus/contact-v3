@@ -1,4 +1,9 @@
-<h1><%= current_user_is_mod? ? 'Contact' : 'Your' %> Tickets</h1>
+<h1>
+  <%= current_user_is_mod? ? 'Contact' : 'Your' %> Tickets
+  <% if current_user_is_mod? %>
+    · <%= link_to 'Contact Bans', bans_path %>
+  <% end %>
+</h1>
 
 <% unless current_user_is_mod? %>
   <%= turbo_frame_tag 'new-ticket-frame', src: new_ticket_path %>

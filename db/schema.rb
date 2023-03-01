@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_19_090842) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_175029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_19_090842) do
     t.string "pfp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "banned", default: false
   end
 
   add_foreign_key "contact_comments", "contact_tickets", column: "ticket_id"
