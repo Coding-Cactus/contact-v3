@@ -31,6 +31,7 @@
 }
 
 #change-status.open ul {
+    padding: 0;
     height: 74px;
     width: 100%;
     transition: height 0.3s, width 0s;
