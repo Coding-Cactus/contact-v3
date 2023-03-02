@@ -11,12 +11,12 @@ class Comment < ApplicationRecord
   validates :moderator, inclusion: { in: [ true, false ] }
 
   after_create do
-    if self.moderator && Rails.env.production?
+    if moderator && Rails.env.production?
       Thread.new do
         Client.new(ENV['SID']).send_notification(
-          self.ticket.user.username,
-          "A moderator has replied to your #{self.ticket.type.display_str}",
-          "https://contact.moderation.repl.co/tickets/#{self.ticket.id}"
+          ticket.user.username,
+          "A moderator has replied to your #{ticket.display_appeal_type}",
+          "https://contact.moderation.repl.co/tickets/#{ticket.id}"
         )
       end
     end
