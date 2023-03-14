@@ -169,22 +169,26 @@ td, th {
     display: inline-flex;
     flex-direction: column;
     margin-right: 60px;
+    width: 100%;
+}
+
+.comment > div > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .comment h3 {
     display: inline-block;
     font-size: var(--paragraph);
     vertical-align: middle;
-    margin-right: 3px;
 }
 
 .comment .moderator {
     background-color: #8DA7B7;
     font-size: var(--overview);
     border-radius: var(--radius-standard);
-    margin: 0 3px;
     padding: 4px 10px;
-    vertical-align: middle;
 }
 
 .comment .moderator span {
@@ -211,6 +215,16 @@ td, th {
     white-space: pre-line;
     overflow-wrap: break-word;
     max-width: 900px;
+}
+
+.comment a {
+    padding: 4px 10px !important;
+    font-size: var(--overview) !important;
+    margin: 0 !important;
+}
+
+.comment form {
+    margin: 10px 0;
 }
 
 #comments label {

@@ -1,4 +1,4 @@
-<div class="comment">
+<%= turbo_frame_tag comment.id, class: 'comment' do %>
   <img src="<%= resize(comment.user.pfp) %>" height="50" width="50" alt="Comment author's profile picture" />
   <div>
     <div>
@@ -7,7 +7,15 @@
         <span class="moderator"><ion-icon name="star"></ion-icon><span>Moderator</span></span>
       <% end %>
       <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+      <% if current_user_is_mod? && current_user.id == comment.user_id %>
+        <%= link_to 'Edit', edit_ticket_comment_path(comment.ticket_id, comment.id) %>
+      <% end %>
     </div>
     <p><%= comment.content %></p>
   </div>
-</div>
+
+
+  <% flash.each do |type, msg| %>
+    <span data-controller="flash" data-flash-target="flash" class="flash <%= type %>"><%= msg %></span>
+  <% end %>
+<% end %>

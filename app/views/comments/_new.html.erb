@@ -2,7 +2,7 @@
   <%= form.label :comment, 'Post Comment' %>
   <%= form.text_area :content,
                      required: true,
-                     placeholder: 'Give some information regarding your appeal' %>
+                     placeholder: 'Enter comment' %>
 
   <% comment.errors.full_messages.each do |msg| %>
     <p class="error"><%= msg %></p>

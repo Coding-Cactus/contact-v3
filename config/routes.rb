@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :signin, only: :index
 
   resources :tickets, only: %i[index show new create update] do
-    resources :comments, only: %i[index create]
+    resources :comments, only: %i[index show create edit update]
   end
 
   get 'banned' => 'bans#banned'
