@@ -1,20 +1,22 @@
-<%= turbo_frame_tag comment.id, class: 'comment'  do %>
-  <img src="<%= resize(comment.user.pfp) %>" height="50" width="50" alt="Comment author's profile picture" />
-  <div>
+<% if comment.valid? %>
+  <%= turbo_frame_tag comment.id, class: 'comment'  do %>
+    <img src="<%= resize(comment.user.pfp) %>" height="50" width="50" alt="Comment author's profile picture" />
     <div>
-      <h3><%= comment.user.username %></h3>
-      <% if comment.moderator %>
-        <span class="moderator"><ion-icon name="star"></ion-icon><span>Moderator</span></span>
-      <% end %>
-      <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
-      <% if current_user_is_mod? && current_user.id == comment.user_id %>
-        <%= link_to 'Edit', edit_ticket_comment_path(comment.ticket_id, comment.id) %>
-      <% end %>
+      <div>
+        <h3><%= comment.user.username %></h3>
+        <% if comment.moderator %>
+          <span class="moderator"><ion-icon name="star"></ion-icon><span>Moderator</span></span>
+        <% end %>
+        <span class="timestamp"><%= time_ago_in_words(comment.created_at) %> ago</span>
+        <% if current_user_is_mod? && current_user.id == comment.user_id %>
+          <%= link_to 'Edit', edit_ticket_comment_path(comment.ticket_id, comment.id) %>
+        <% end %>
+      </div>
+      <p><%= comment.content %></p>
     </div>
-    <p><%= comment.content %></p>
-  </div>
 
-  <% if flash[:comment_edit] %>
-    <span data-controller="flash" data-flash-target="flash" class="flash notice"><%= flash[:comment_edit] %></span>
+    <% if flash[:comment_edit] %>
+      <span data-controller="flash" data-flash-target="flash" class="flash notice"><%= flash[:comment_edit] %></span>
+    <% end %>
   <% end %>
 <% end %>
