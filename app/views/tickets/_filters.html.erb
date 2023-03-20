@@ -1,4 +1,4 @@
-<%= form_with url: tickets_path, method: :get, data: { turbo_frame: 'tickets-list' } do |form| %>
+<%= form_with url: tickets_path, method: :get, data: { turbo_frame: 'tickets-list', controller: 'form', action: 'disable' } do |form| %>
   <%= render 'dropdown',
              id: 'filters',
              form: form,

@@ -137,6 +137,12 @@ button, input[type='submit'], #home, .banned-user a, .comment a {
     text-decoration: none;
 }
 
+button:disabled, input[type='submit']:disabled, #home:disabled, .banned-user a:disabled, .comment a:disabled {
+    cursor: not-allowed !important;
+    background-color: #596859 !important;
+    transform: scale(1) !important;
+}
+
 button:hover, input[type='submit']:hover, #home:hover, .banned-user a:hover, .comment a:hover {
     background-color: var(--foreground-higher);
     transform: scale(1.05);

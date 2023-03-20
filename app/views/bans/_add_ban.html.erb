@@ -1,4 +1,4 @@
-<%= form_with url: bans_path, method: 'post', id: 'add-ban' do |form| %>
+<%= form_with url: bans_path, method: 'post', id: 'add-ban', data: { controller: 'form', action: 'disable' } do |form| %>
   <h2>Add Banned User</h2>
 
   <%= form.label :username %>

@@ -1,6 +1,6 @@
 <% if current_user_is_mod? %>
   <%= turbo_frame_tag 'change-status-frame' do %>
-    <%= form_with model: ticket, id: 'change-status-form' do |form| %>
+    <%= form_with model: ticket, id: 'change-status-form', data: { controller: 'form', action: 'disable' } do |form| %>
       <%= render 'dropdown',
                  id: 'change-status',
                  form: form,

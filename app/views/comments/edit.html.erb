@@ -9,7 +9,7 @@
       <span class="timestamp"><%= time_ago_in_words(@comment.created_at) %> ago</span>
       <%= link_to 'Cancel', ticket_comment_path(@comment.ticket_id, @comment.id) %>
     </div>
-    <%= form_for @comment, url: ticket_comment_path(@comment.ticket_id, @comment.id) do |form| %>
+    <%= form_for @comment, url: ticket_comment_path(@comment.ticket_id, @comment.id), data: { controller: 'form', action: 'disable' } do |form| %>
       <%= form.text_area :content,
                          required: true,
                          placeholder: 'Enter comment' %>

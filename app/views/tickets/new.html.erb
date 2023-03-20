@@ -7,7 +7,7 @@
 
     <div id="new-ticket-overlay" data-new-ticket-target="overlay" <%= 'class=show' if @ticket.errors.messages.length > 0 %>>
 
-      <%= form_with model: @ticket, id: 'new-ticket' do |form| %>
+      <%= form_with model: @ticket, id: 'new-ticket', data: { controller: 'form', action: 'disable' } do |form| %>
         <div id="close" data-action="click->new-ticket#close">
           <ion-icon name="close-outline"></ion-icon>
         </div>
