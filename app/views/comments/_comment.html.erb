@@ -14,8 +14,7 @@
     <p><%= comment.content %></p>
   </div>
 
-
-  <% flash.each do |type, msg| %>
-    <span data-controller="flash" data-flash-target="flash" class="flash <%= type %>"><%= msg %></span>
+  <% if flash[:comment_edit] %>
+    <span data-controller="flash" data-flash-target="flash" class="flash notice"><%= flash[:comment_edit] %></span>
   <% end %>
 <% end %>

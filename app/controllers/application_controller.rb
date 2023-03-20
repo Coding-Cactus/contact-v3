@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_action :require_login
   before_action :check_banned
 
+  add_flash_types :comment_edit
+
   private
 
   DEVELOPMENT_USER_ID     = 2681007

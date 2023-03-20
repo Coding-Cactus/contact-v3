@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      flash[:notice] = 'Comment updated!'
+      flash[:comment_edit] = 'Comment updated!'
       redirect_to ticket_comment_path(@comment.ticket_id, @comment.id)
     else
       flash.now[:alert] = 'Invalid comment!'
