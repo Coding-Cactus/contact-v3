@@ -13,24 +13,26 @@ export default class extends Controller {
         const topText = top.innerText
         const topClasses = top.parentElement.className
         const topId = top.parentElement.getAttribute("data-option")
+        const topIndex = top.parentElement.getAttribute("data-index")
 
         top.innerText = e.target.innerText
         top.parentElement.className = e.target.className
+        top.parentElement.setAttribute("data-index", e.target.getAttribute("data-index"))
         top.parentElement.setAttribute("data-option", e.target.getAttribute("data-option"))
 
         this.singleHiddenTarget.value = top.parentElement.getAttribute("data-option")
 
         setTimeout(() => {
-
             e.target.innerText = topText
             e.target.className = topClasses;
             e.target.setAttribute("data-option", topId)
+            e.target.setAttribute("data-index", topIndex)
 
-            if (!!document.querySelector("#change-status")) {
-                Array.from(document.querySelectorAll("#change-status li"))
-                    .sort((a, b) => Number(a.getAttribute("data-option")) - Number(b.getAttribute("data-option")))
-                    .forEach(elem => document.querySelector("#change-status ul").appendChild(elem));
-            }
+            const ul = e.target.parentElement
+
+            Array.from(ul.children)
+                .sort((a, b) => Number(a.getAttribute("data-index")) - Number(b.getAttribute("data-index")))
+                .forEach(elem => ul.appendChild(elem));
         }, 300)
     }
 

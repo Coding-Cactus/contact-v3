@@ -81,6 +81,7 @@
 #type ul {
     position: absolute;
     top: 46px;
+    padding: 0;
     left: 0;
     height: 0;
     list-style: none;
@@ -111,7 +112,7 @@
 }
 
 #type.open ul {
-    height: 46px;
+    height: calc(46px * 2);
 }
 
 #new-ticket #note {

@@ -8,7 +8,7 @@ class Ticket < ApplicationRecord
   belongs_to :user
 
   enum status:      %i[incomplete in-progress accepted denied]
-  enum appeal_type: %i[warn ban report]
+  enum appeal_type: %i[warn ban report general]
 
   has_many :comments
   has_many :infractions
@@ -34,7 +34,26 @@ class Ticket < ApplicationRecord
   end
 
   def display_appeal_type
-    "#{appeal_type.to_s.gsub('-', ' ').titlecase} Appeal"
+    Ticket.format_ticket_type(appeal_type)
+  end
+
+  def self.format_ticket_type(type)
+    case type
+    when 'warn', 'ban' then "#{type.to_s.titlecase} Appeal"
+    when 'report' then 'User Report'
+    when 'general' then 'Contact Us'
+    else type
+    end
+  end
+
+  def self.unformat_ticket_type(text)
+    case text
+    when format_ticket_type('warn') then 'warn'
+    when format_ticket_type('ban') then 'ban'
+    when format_ticket_type('report') then 'report'
+    when format_ticket_type('general') then 'general'
+    else text
+    end
   end
 
   def display_status

@@ -12,21 +12,21 @@
           <ion-icon name="close-outline"></ion-icon>
         </div>
 
-        <label>Select Appeal Type</label>
+        <label>Select Ticket Type</label>
         <%= render 'dropdown',
                    id: 'type',
                    form: form,
                    data_id: :appeal_type,
-                   choices: @appeal_types,
-                   selected: @default_type,
+                   choices: @appeal_types.map { |t| Ticket.format_ticket_type(t) },
+                   selected: Ticket.format_ticket_type(@default_type),
                    multiselect: false,
                    assign_classes: false %>
 
-        <%= form.label :content, 'Appeal Reason' %>
+        <%= form.label :content, 'Ticket Description' %>
         <%= form.text_area :content,
                            minlength: 50,
                            required: true,
-                           placeholder: 'Give some information regarding your appeal' %>
+                           placeholder: 'Give some information regarding your ticket' %>
 
         <% @ticket.errors.full_messages.each do |msg| %>
           <p class="error"><%= msg %></p>

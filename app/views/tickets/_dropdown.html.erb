@@ -8,6 +8,7 @@
       <% unless multiselect %>
         class="<%= selected if assign_classes %>"
         data-option="<%= selected %>"
+        data-index="<%= choices.index(selected) %>"
       <% end %>
     >
       <span data-dropdown-target="selected"><%= multiselect ? hint : display_str(selected) %></span>
@@ -51,6 +52,7 @@
             class="<%= choice if assign_classes %>"
             data-action="click->dropdown#selectOption"
             data-option="<%= choice %>"
+            data-index="<%= choices.index(choice) %>"
           >
             <%= display_str(choice) %>
           </li>

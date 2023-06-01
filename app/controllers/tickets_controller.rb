@@ -54,7 +54,9 @@ class TicketsController < ApplicationController
   end
 
   def new_ticket_params
-    params.require(:ticket).permit(:appeal_type, :content)
+    pa = params.require(:ticket).permit(:appeal_type, :content)
+    pa[:appeal_type] = Ticket.unformat_ticket_type(pa[:appeal_type])
+    pa
   end
 
   def update_params
@@ -74,7 +76,7 @@ class TicketsController < ApplicationController
   end
 
   def populate_types_and_status
-    @appeal_types = Ticket.appeal_types_list.reject { |t| t == "report" }
+    @appeal_types = Ticket.appeal_types_list.reject { |t| t == 'report' }
     @default_type = @appeal_types[0]
   end
 end
